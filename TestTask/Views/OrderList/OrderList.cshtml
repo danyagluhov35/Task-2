@@ -1,0 +1,108 @@
+﻿@using TestTask.Entity
+@model List<OrderUser>
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список заказов</title>
+    <link rel="stylesheet" href="/css/OrderList/OrderList.css">
+</head>
+<body>
+
+    <!-- Если заказов у пользователя нет, информируем его -->
+    @if (Model.Count <= 0)
+    {
+        <div class="none-order">
+            <h1>Заказов нет</h1>
+            <a href="/Order/Order">Сделать первый заказ</a>
+        </div>
+    }
+    else
+    {
+        <div class="make-order">
+            <a href="/Order/Order">Сделать заказ</a>
+        </div>
+        <div class="orders-container">
+            <h1>Список заказов</h1>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Номер заказа</th>
+                        <th>Вес товара</th>
+                        <th>Дата заказа</th>
+                        <th>Действие</th>
+                    </tr>
+                </thead>
+                @foreach (var item in Model)
+                {
+                    <tbody>
+                        <tr class="order-row">
+                            <td class="Id">@item.Order.Id</td>
+                            <td>@item.Order.Weight</td>
+                            <td>@item.Order.CollectionDate</td>
+                            <td>
+                                <a class="delete-order" href="#" data-id="@item.Order.Id">Удалить</a>
+                            </td>
+                        </tr>
+                        <tr class="order-details">
+                            <td colspan="5">
+                                <div class="details-content">
+                                    <p><strong>Город отправителя:</strong>@item.Order.SenderCity</p>
+                                    <p><strong>Адрес отправителя:</strong>@item.Order.SenderAddress</p>
+                                    <p><strong>Город получателя:</strong>@item.Order.ReceiverCity</p>
+                                    <p><strong>Адрес получателя:</strong>@item.Order.ReceiverAddress</p>
+                                    <p><strong>Вес груза:</strong>@item.Order.Weight кг</p>
+                                    <p><strong>Дата забора груза:</strong>@item.Order.CollectionDate</p>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                }
+            </table>
+        </div>
+    }
+
+    <!-- Уведомление об удалении заказа -->
+    <div id="delete-notification" class="delete-notification">
+        <p></p>
+        <button class="close-btn" onclick="closeNotification()">×</button>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script>
+        // Функция для закрытия уведомления
+        function closeNotification() {
+            $('#delete-notification').fadeOut();
+        }
+
+        // Раскрытие дополнительной информации о товаре
+        $(document).on("click", ".order-row", async function(e){
+            e.preventDefault();
+
+            var res = $(this).next(".order-details");
+            res.toggleClass("active");
+        })
+
+        // Удаление заказа
+        $(document).on("click", ".delete-order", async function(e){
+            e.preventDefault();
+
+            var id = $(this).data("id");
+            const response = await fetch(`/OrderList/DeleteOrder?id=${id}`);
+            if(response.ok == true){
+                const data = await response.json()
+                $(this).closest("tbody").remove();
+
+                // Показ уведомления
+                $(".delete-notification p").text(data.message)
+                $("#delete-notification").addClass("show").fadeOut(3000);
+            } else {
+                alert("Не удалось удалить заказ.");
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,153 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: #fff;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position:relative;
+}
+
+.orders-container {
+    width: 90%;
+    max-width: 1000px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #fff;
+    margin-bottom: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+table th {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #fff;
+    font-weight: bold;
+}
+
+table tr.order-row:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+    cursor: pointer;
+}
+
+table td {
+    color: #fff;
+}
+
+.none-order a {
+    font-weight: 600;
+    color: #fff;
+    background: #1e6672;
+    border-radius: 10px;
+    padding: 10px;
+    text-decoration: none;
+}
+
+.none-order a:hover {
+    background: #379cad;
+}
+
+.order-details {
+    display: none;
+}
+
+    .order-details.active {
+        display: block;
+    }
+
+
+.delete-notification {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: #ff4d4d; 
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.3s ease;
+    z-index: 1000;
+}
+
+.delete-notification.show {
+    display: block;
+    opacity: 1;
+    transform: translateY(0); /* Плавное появление */
+}
+
+.delete-notification p {
+    margin: 0;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.delete-notification .close-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    transition: color 0.3s ease;
+}
+
+.delete-notification .close-btn:hover {
+    color: #ffcccb; 
+}
+
+.delete-order {
+    text-decoration: none;
+    color: red;
+    text-align: center;
+}
+
+.make-order {
+    text-align: center;
+    margin: 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.make-order a {
+    display: inline-block;
+    font-weight: 600;
+    color: #fff;
+    background: #1e6672;
+    border-radius: 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.make-order a:hover {
+    background: #379cad;
+}
+
+

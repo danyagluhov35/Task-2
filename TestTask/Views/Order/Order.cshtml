@@ -1,0 +1,62 @@
+﻿@using TestTask.Entity;
+@model Order;
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/Order/Order.css">
+    <title>Оформление заказа</title>
+</head>
+<body>
+    <div class="form-container">
+        <form class="order-form" asp-action="AddOrder" method="post">
+            <h2>Оформление заказа</h2>
+
+            <div class="form-group">
+                <label for="sender-city">Город отправителя:</label>
+                <input type="text" asp-for="SenderCity">
+                <span asp-validation-for="SenderCity"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="sender-address">Адрес отправителя:</label>
+                <input asp-for="SenderAddress" type="text">
+                <span asp-validation-for="SenderAddress"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="receiver-city">Город получателя:</label>
+                <input asp-for="ReceiverCity" type="text">
+                <span asp-validation-for="ReceiverCity"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="receiver-address">Адрес получателя:</label>
+                <input asp-for="ReceiverAddress" type="text">
+                <span asp-validation-for="ReceiverAddress"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="cargo-weight">Вес груза (кг):</label>
+                <input asp-for="Weight" type="number">
+                <span asp-validation-for="Weight"></span>
+            </div>
+
+            <div class="form-group">
+                <label for="pickup-date">Дата забора груза:</label>
+                <input asp-for="CollectionDate" type="date">
+                <span asp-validation-for="CollectionDate"></span>
+            </div>
+            <input type="submit" class="submit-button" value="Оформить заказ" />
+        </form>
+    </div>
+
+
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.5.1.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.17.0/jquery.validate.min.js"></script>
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.validation.unobtrusive/3.2.10/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>
