@@ -21,6 +21,7 @@ namespace TestTask.Entity
         [Required(ErrorMessage = "Поле обязательно к заполнению")]
         public string? ReceiverAddress { get; set; } // Адрес получателя
         [Required(ErrorMessage = "Поле обязательно к заполнению")]
+        [Range(0, double.MaxValue, ErrorMessage = "Вес не может быть отрицательным")]
         public double? Weight { get; set; } // Вес груза
         [Required(ErrorMessage = "Поле обязательно к заполнению")]
         public DateTime? CollectionDate { get; set; } // Время забора груза
